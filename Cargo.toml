@@ -1,0 +1,12 @@
+[package]
+name = "load_balancer"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+actix-web = "4.0"
+reqwest = "0.11"
+
+[[bin]]
+name = "load_balancer"
+path = "src/main.rs"
