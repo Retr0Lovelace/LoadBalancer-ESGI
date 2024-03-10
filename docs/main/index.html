@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Pool de Serveurs Actix"><title>main - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="main" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../main/index.html">main</a></h2></div><div class="sidebar-elems"><ul class="block">
+            <li><a id="all-types" href="all.html">All Items</a></li></ul></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../main/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">main</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/main/main.rs.html#1-126">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="pool-de-serveurs-actix"><a href="#pool-de-serveurs-actix">Pool de Serveurs Actix</a></h2>
+<p>Ce module implémente un pool de serveurs pour équilibrer la charge des demandes HTTP entrantes
+entre plusieurs serveurs.</p>
+<p>Chaque serveur est représenté par une adresse et le nombre de connexions actives.</p>
+<h3 id="structures"><a href="#structures">Structures</a></h3>
+<p>Structure représentant un serveur avec son adresse et le nombre de connexions actives.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">struct </span>Server {
+    address: String,
+    connections: usize,
+}</code></pre></div>
+<p>Structure représentant un pool de serveurs.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">struct </span>ServerPool {
+    servers: Vec&lt;Server&gt;,
+}</code></pre></div>
+<h3 id="implémentation-de-serverpool"><a href="#implémentation-de-serverpool">Implémentation de <code>ServerPool</code></a></h3>
+<p>La structure <code>ServerPool</code> contient des méthodes pour gérer les serveurs dans le pool.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>ServerPool {
+    <span class="doccomment">/// Méthode de création d'un nouveau pool de serveurs.
+    ///
+    /// # Arguments
+    ///
+    /// * `servers` - Vecteur d'adresses de serveurs à inclure dans le pool.
+    ///
+    /// # Exemple
+    ///
+    /// ```
+    /// let servers = vec![
+    ///     "localhost:8081".to_string(),
+    ///     "localhost:8082".to_string(),
+    /// ];
+    /// let pool = ServerPool::new(servers);
+    /// ```
+    </span><span class="kw">fn </span>new(servers: Vec&lt;String&gt;) -&gt; <span class="self">Self </span>{
+        <span class="comment">// Implémentation de la méthode new()
+    </span>}
+
+    <span class="doccomment">/// Méthode pour obtenir le prochain serveur en fonction du nombre de connexions actives.
+    ///
+    /// Cette méthode parcourt tous les serveurs pour trouver celui avec le moins de connexions
+    /// et retourne une référence mutable vers ce serveur.
+    ///
+    /// # Exemple
+    ///
+    /// ```
+    /// let mut pool = ServerPool::new(vec![
+    ///     "localhost:8081".to_string(),
+    ///     "localhost:8082".to_string(),
+    /// ]);
+    /// let server = pool.next_server();
+    /// ```
+    </span><span class="kw">fn </span>next_server(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Server {
+        <span class="comment">// Implémentation de la méthode next_server()
+    </span>}
+}</code></pre></div>
+<h3 id="fonction-index"><a href="#fonction-index">Fonction <code>index</code></a></h3>
+<p>La fonction <code>index</code> est un gestionnaire pour la route racine (“/”).</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="doccomment">/// Fonction de gestionnaire pour l'index.
+///
+/// Cette fonction est appelée lorsqu'une demande HTTP est reçue sur la racine ("/").
+///
+/// # Arguments
+///
+/// * `req` - La demande HTTP reçue.
+/// * `pool` - Données partagées contenant le pool de serveurs.
+///
+/// # Retourne
+///
+/// Un objet implémentant le trait `Responder`, généralement une réponse HTTP.
+///
+/// # Exemple d'utilisation
+///
+/// ```rust
+/// async fn some_handler(req: HttpRequest, pool: web::Data&lt;Arc&lt;Mutex&lt;ServerPool&gt;&gt;&gt;) -&gt; impl Responder {
+///     // Traitement de la demande...
+/// }
+/// ```
+</span><span class="kw">async fn </span>index(req: HttpRequest, pool: web::Data&lt;Arc&lt;Mutex&lt;ServerPool&gt;&gt;&gt;) -&gt; <span class="kw">impl </span>Responder {
+    <span class="comment">// Implémentation de la fonction index()
+</span>}</code></pre></div>
+<h3 id="fonction-main"><a href="#fonction-main">Fonction <code>main</code></a></h3>
+<p>La fonction <code>main</code> est utilisée pour lancer le serveur Actix.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="doccomment">/// Fonction principale pour lancer le serveur.
+///
+/// Cette fonction initialise le pool de serveurs, configure et lance le serveur Actix.
+///
+/// # Retourne
+///
+/// Un `Result` indiquant si le serveur a été démarré avec succès ou s'il y a eu une erreur.
+///
+/// # Exemple d'utilisation
+///
+/// ```rust
+/// fn main() -&gt; std::io::Result&lt;()&gt; {
+///     // Lancement du serveur...
+/// }
+/// ```
+</span><span class="attr">#[actix_web::main]
+</span><span class="kw">async fn </span>main() -&gt; std::io::Result&lt;()&gt; {
+    <span class="comment">// Implémentation de la fonction main()
+</span>}</code></pre></div>
+</div></details></section></div></main></body></html>
