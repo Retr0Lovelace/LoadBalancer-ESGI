@@ -14,11 +14,11 @@ Assurez-vous d'avoir Rust et Cargo installés sur votre système.
 
 1. Clonez ce dépôt :
 
-git clone [https://github.com/votre-utilisateur/actix-web-proxy.git](https://github.com/Retr0Lovelace/LoadBalancer-ESGI)
+git clone [https://github.com/Retr0Lovelace/LoadBalancer-ESGI](https://github.com/Retr0Lovelace/LoadBalancer-ESGI)
 
 2. Accédez au répertoire du projet :
 
-cd actix-web-proxy
+cd LoadBalancer-ESGI
 
 3. Exécutez l'application :
 

@@ -140,6 +140,6 @@ HOST_ARFLAGS = None
 cargo:rerun-if-env-changed=ARFLAGS
 ARFLAGS = None
 cargo:rustc-link-lib=static=zstd
-cargo:rustc-link-search=native=/home/retr0/Bureau/LoadBalancer/target/debug/build/zstd-sys-4cc6b8c0e83c2a24/out
-cargo:root=/home/retr0/Bureau/LoadBalancer/target/debug/build/zstd-sys-4cc6b8c0e83c2a24/out
+cargo:rustc-link-search=native=/home/retr0/Bureau/LoadBalancer-ESGI/target/debug/build/zstd-sys-4cc6b8c0e83c2a24/out
+cargo:root=/home/retr0/Bureau/LoadBalancer-ESGI/target/debug/build/zstd-sys-4cc6b8c0e83c2a24/out
 cargo:include=/home/retr0/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zstd-sys-2.0.9+zstd.1.5.5/zstd/lib
